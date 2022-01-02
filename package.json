@@ -1,0 +1,23 @@
+{
+  "name": "oop-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RossWestwater/OOP-Challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RossWestwater/OOP-Challenge/issues"
+  },
+  "homepage": "https://github.com/RossWestwater/OOP-Challenge#readme",
+  "dependencies": {
+    "jest": "^27.4.5"
+  }
+}
