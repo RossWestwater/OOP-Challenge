@@ -1,33 +1,16 @@
 const inquirer = require('inquirer');
 const generateHTML = require('./src/generateHTML');
 const { writeFile, copyFile } = require('./src/generateHTML');
-const manager = require('./lib/Manager');
-const engineer = require('./lib/Engineer');
-const intern = require('./lib/Intern');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 
-// const employees = [
-//   {
-//     role: 'Manager',
-//     name: '',
-//     id:'',
-//     email:'',
-//     officeNum:''
-//   },
-//   [{
-//     role: 'Engineer',
-//     name: '',
-//     id: '',
-//     email: '',
-//     github: ''
-//   }],
-//   [{
-//     role: 'Intern',
-//     name: '',
-//     id: '',
-//     email: '',
-//     github: ''
-//   }]
-// ];
+const employees =
+  {
+    manager:[],
+    engineers:[],
+    interns:[]
+  }
 
 const mgrPrompt = () => {
   return inquirer.prompt([
@@ -85,7 +68,8 @@ const mgrPrompt = () => {
     }
   ])
   .then( res => {
-    console.log(new manager(res.mgrName, res.mgrId, res.mgrEmail, res.mgrOffcNum));
+    employees.manager.push(new Manager(res.mgrName, res.mgrId, res.mgrEmail, res.mgrOffcNum));
+    console.log(employees)
   })
 };
     
@@ -165,10 +149,28 @@ const engineerPrompt = () => {
     }
     ])
     .then( res => {
-      console.log(new engineer(res.engName, res.engId, res.engEmail, res.engGithub))
+      employees.engineers.push(new Engineer(res.engName, res.engId, res.engEmail, res.engGithub))
+      console.log(employees)
+    })
+    .then( () => {
+      return inquirer.prompt([
+        {
+          type: 'confirm',
+          name: 'addEmp',
+          message: 'Would you like to add another employee?',
+          default: false,
+        }
+      ])
+      .then(res => {
+        if (res.addEmp === true) {
+          return employeePrompt();
+        }
+        else {
+          return generateHTML(employees);
+        }
+      })
     })
 };
-
 
 const internPrompt = () => {
   return inquirer.prompt([
@@ -226,31 +228,43 @@ const internPrompt = () => {
     }
     ])
     .then( res => {
-      console.log(new intern(res.intName, res.intId, res.intEmail, res.intSchool))
+      employees.interns.push(new Intern(res.intName, res.intId, res.intEmail, res.intSchool))
+      console.log(employees)
+    })
+    .then( () => {
+      return inquirer.prompt([
+        {
+          type: 'confirm',
+          name: 'addEmp',
+          message: 'Would you like to add another employee?',
+          default: false,
+        }
+      ])
+      .then(res => {
+        if (res.addEmp === true) {
+          return employeePrompt();
+        }
+        else {
+          return generateHTML(employees)
+        }
+      })
     })
 };
 
-const addEmployee = () => {
-  return inquirer.prompt([
-    {
-      type: 'confirm',
-      name: 'addEmp',
-      message: 'Would you like to add another employee?',
-      default: false,
-    }
-  ])
-  .then(res => {
-    if (res.addEmp === true) {
-      return employeePrompt();
-    }
-    else {
-      return
-    }
-  })
-}
-
 mgrPrompt()
 .then(employeePrompt)
+.then(pageHTML => {
+  return writeFile(pageHTML);
+})
+.then(writeFileResponse => {
+  console.log(writeFileResponse);
+  return copyFile();
+})
+.catch(err => {
+  console.log(err);
+});
+
+
 
 // enter all manager info, then save to a manager object
 // select between employee engineer/intern

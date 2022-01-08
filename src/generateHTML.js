@@ -1,9 +1,12 @@
+
+
 function generateManager(data) {
+
   `      
   <div class="card shadow col-3 p-0 mx-3 mb-5">
     <div class="card-body p-0">
       <section class="bg-primary p-3">
-        <h3 class="card-title font-weight-bolder text-light">Emple Name</h3>
+        <h3 class="card-title font-weight-bolder text-light">${data.name}</h3>
         <i class="fas fa-mug-hot fa-2x text-light"></i>
         <p class="card-text d-inline-flex text-light role">
           Manager
@@ -25,7 +28,7 @@ function generateEngineer(data) {
   <div class="card shadow col-3 p-0 mx-3 mb-5">
     <div class="card-body p-0">
       <section class="bg-primary p-3">
-        <h3 class="card-title font-weight-bolder text-light">Emple Name</h3>
+        <h3 class="card-title font-weight-bolder text-light">${data.name}</h3>
         <i class="fas fa-glasses fa-2x text-light"></i>
         <p class="card-text d-inline-flex text-light">
           Engineer
@@ -48,7 +51,7 @@ function generateIntern(data) {
   <div class="card shadow col-3 p-0 mx-3 mb-5">
     <div class="card-body p-0">
       <section class="bg-primary p-3">
-        <h3 class="card-title font-weight-bolder text-light">Emple Name</h3>
+        <h3 class="card-title font-weight-bolder text-light">${data.name}</h3>
         <i class="fas fa-user-graduate fa-2x text-light"></i>
         <p class="card-text d-inline-flex text-light">
           Intern
@@ -66,9 +69,10 @@ function generateIntern(data) {
   `
 }
 
-function generateHTML(data) {
-  
-`<!DOCTYPE html>
+function generateHTML(teamInfo) {
+  console.log(teamInfo.manager)
+return `
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -94,10 +98,14 @@ function generateHTML(data) {
     <div class="row justify-content-center mx-5 my-5">
       <div class="col-8">
         <div class="row justify-content-center">
-
-    </div>
+        ${generateManager(teamInfo.manager)}
+        ${generateEngineer(teamInfo.engineers)}
+        ${generateIntern(teamInfo.interns)}
+        </div>
     </div>
     </div>
   </body>
 </html>`;
 }
+
+module.exports = generateHTML()
