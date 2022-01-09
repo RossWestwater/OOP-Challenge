@@ -69,8 +69,8 @@ function generateIntern(data) {
   `
 }
 
-function generateHTML(teamInfo) {
-  console.log(teamInfo.manager)
+module.exports = function generateHTML(teamInfo) {
+  console.log(teamInfo)
 return `
 <!DOCTYPE html>
 <html lang="en">
@@ -107,5 +107,3 @@ return `
   </body>
 </html>`;
 }
-
-module.exports = generateHTML()
