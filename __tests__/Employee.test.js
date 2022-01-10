@@ -11,4 +11,5 @@ test('methods of employee object', () => {
   expect(employee.getName()).toEqual('Stacy');
   expect(employee.getId()).toEqual('1125');
   expect(employee.getEmail()).toEqual('stacy@badass.com');
+  expect(employee.getRole()).toEqual('Employee')
 })

@@ -5,7 +5,7 @@ test('properties of engineer object', () => {
   expect(engineer.name).toEqual('George');
   expect(engineer.id).toEqual('0893');
   expect(engineer.email).toEqual('george@station.com');
-  expect(engineer.githubName).toEqual('RossWestwater');
+  expect(engineer.github).toEqual('RossWestwater');
 })
 test('methods of engineer object', () => {
   const engineer = new Engineer('Stacy', '1125', 'stacy@badass.com', 'RossWestwater');
